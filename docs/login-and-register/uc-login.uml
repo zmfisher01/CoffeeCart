@@ -1,0 +1,119 @@
+@startuml
+
+actor Customer as "Customer OR Merchant"
+participant CoffeeCart
+participant LoginView
+participant LoginController
+participant CoffeeModel
+participant LinkedList
+participant User
+participant "ActionListener <<interface>>" as ActionListener
+participant CustomerMainView as "CustomerMainView OR MerchantMainView"
+
+note left of Customer
+Created by Zee Fisher
+end note
+
+note left of Customer
+Customer Logs In
+
+	1. System displays Login page with option to sign in or create account.
+	2. Customer enters username and Password
+	3. Customer selects “Submit”
+	4. System compares login info to database and finds matching username and hashed password
+	5. System displays home page: a list of purchasable items, each with a picture, name, and price
+	6. System displays options to view details, add to cart, and view cart
+
+OR
+
+Merchant Logs In
+
+	1. System displays Login page with option to sign in or create account.
+	2. Merchant enters username and Password
+	3. Merchant selects “Submit”
+	4. System compares login info to database and finds matching username and hashed password
+	5. System displays merchant page: a list of items up for sale, each with a picture, name, and price
+	6. System displays options to view details, remove product, and add product.
+end note
+
+note left of Customer
+**These Use Cases have been comibined due to being nearly indistinguishable.**
+end note
+
+CoffeeCart -> CoffeeCart : main()
+activate CoffeeCart
+CoffeeCart -> CoffeeModel : getInstance()
+activate CoffeeModel
+CoffeeModel --> CoffeeCart : CoffeeModel
+deactivate CoffeeModel
+CoffeeCart -> CoffeeModel : recoverUserList()
+activate CoffeeModel
+deactivate CoffeeModel
+CoffeeCart -> LoginView : getInstance()
+activate LoginView
+LoginView --> CoffeeCart : LoginView
+deactivate LoginView
+CoffeeCart -> LoginView : show()
+deactivate CoffeeCart
+
+activate LoginView
+LoginView -> LoginController : getInstance()
+activate LoginController
+LoginController --> LoginView : LoginController
+deactivate LoginController
+LoginView -> LoginController : loginButtonListener()
+activate LoginController
+LoginController -> ActionListener : <<create>>
+activate ActionListener
+LoginController --> LoginView : ActionListener
+deactivate ActionListener
+deactivate LoginController
+LoginView -> LoginController : registerButtonListener()
+activate LoginController
+LoginController -> ActionListener : <<create>>
+activate ActionListener
+LoginController --> LoginView : ActionListener
+deactivate ActionListener
+deactivate LoginController
+LoginView --> Customer : Swing GUI
+Customer --> LoginView : Enters username and password in GUI
+deactivate LoginView
+Customer --> ActionListener : Presses Login button
+
+activate ActionListener
+ActionListener -> CoffeeModel : getInstance()
+activate CoffeeModel
+CoffeeModel --> ActionListener : CoffeeModel
+deactivate CoffeeModel
+ActionListener -> CoffeeModel : loginUser()
+activate CoffeeModel
+CoffeeModel -> LinkedList : get()
+activate LinkedList
+deactivate LinkedList
+CoffeeModel -> User : ValidateCredentials()
+activate User
+User -> User : hashCode()
+activate User
+deactivate User
+User --> CoffeeModel : true
+deactivate User
+deactivate CoffeeModel
+ActionListener -> LoginView : hide()
+activate LoginView
+deactivate LoginView
+
+ActionListener -> CustomerMainView : getInstance()
+activate CustomerMainView
+CustomerMainView --> ActionListener : CustomerMainView OR MerchantMainView
+deactivate CustomerMainView
+ActionListener -> CustomerMainView : show()
+activate CustomerMainView
+deactivate CustomerMainView
+deactivate ActionListener
+
+
+
+
+
+
+@enduml

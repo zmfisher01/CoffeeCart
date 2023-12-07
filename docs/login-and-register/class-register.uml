@@ -1,0 +1,58 @@
+@startuml
+
+note as owner
+Register Class Diagram
+Created by Zee Fisher
+end note
+
+class User {
+	username: String
+	password: int
+	userType: boolean
+	boolean validateCredentials(username, password)
+	boolean equals() 
+	int hashCode()
+	boolean getUserType()
+	String getUsername()
+}
+
+class CoffeeModel {
+	instance: CoffeeModel
+	userList: LinkedList<User>
+	loggedInUser: User
+	void saveUserList()
+	void recoverUserList()
+	void addUser(String username, String password, boolean userType)	
+	void loginUser(String username, String password)
+	void logoutUser(String username)
+	User getLoggedInUser()
+	getInstance()
+}
+
+class RegisterView {
+	instance: RegisterView
+	void show()
+	void hide()
+	RegisterView getInstance()
+}
+
+class RegisterController {
+	instance: RegisterController
+	ActionListener cancelButtonListener();
+	ActionListener registerButtonListener();
+	RegisterController getInstance()
+}
+
+interface ActionListener
+
+class LinkedList
+
+CoffeeCart "1" --> "1" RegisterView
+CoffeeModel "1" --> "1" LinkedList
+User "*" --o "1" LinkedList
+RegisterController "1" --o "1" RegisterView
+RegisterController "1" --> "*" ActionListener
+RegisterView "1" --o "1" CoffeeModel 
+
+@enduml
+

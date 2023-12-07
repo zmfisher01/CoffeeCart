@@ -1,0 +1,136 @@
+@startuml
+
+actor Customer as "Customer or Merchant"
+participant CoffeeCart
+participant LoginView
+participant LoginController
+participant RegisterView
+participant RegisterController
+participant CoffeeModel
+participant LinkedList
+participant User
+participant "ActionListener <<interface>>" as ActionListener
+
+note left of Customer
+Created by Zee Fisher
+end note
+
+note left of Customer
+Customer Enters Bad Create Account info
+	
+	3.1 After step 2.2 Customer enters already used information or mismatched passwords
+	3.2 System updates registration page to inform customer of the mistake
+
+OR
+
+Merchant Enters Bad Create Account info
+
+	3.1 After step 2.2 Merchant enters already used information or mismatched passwords
+	3.2 System updates registration page to inform Merchant of the mistake
+end note
+
+note left of Customer
+**These Use Cases have been combined due to being nearly indistinguishable**
+end note
+
+CoffeeCart -> CoffeeCart : main()
+activate CoffeeCart
+CoffeeCart -> CoffeeModel : getInstance()
+activate CoffeeModel
+CoffeeModel --> CoffeeCart : CoffeeModel
+deactivate CoffeeModel
+CoffeeCart -> CoffeeModel : recoverUserList()
+activate CoffeeModel
+deactivate CoffeeModel
+CoffeeCart -> LoginView : getInstance()
+activate LoginView
+LoginView --> CoffeeCart : LoginView
+deactivate LoginView
+CoffeeCart -> LoginView : show()
+deactivate CoffeeCart
+
+activate LoginView
+LoginView -> LoginController : getInstance()
+activate LoginController
+LoginController --> LoginView : LoginController
+deactivate LoginController
+LoginView -> LoginController : loginButtonListener()
+activate LoginController
+LoginController -> ActionListener : <<create>>
+activate ActionListener
+LoginController --> LoginView : ActionListener
+deactivate ActionListener
+deactivate LoginController
+LoginView -> LoginController : registerButtonListener()
+activate LoginController
+LoginController -> ActionListener : <<create>>
+activate ActionListener
+LoginController --> LoginView : ActionListener
+deactivate ActionListener
+deactivate LoginController
+LoginView --> Customer : Swing GUI
+deactivate LoginView
+Customer --> ActionListener : Presses Register button
+activate ActionListener
+ActionListener -> LoginView : getInstance()
+activate LoginView
+LoginView --> ActionListener : LoginView
+deactivate LoginView
+ActionListener -> LoginView : hide()
+activate LoginView
+deactivate LoginView
+
+ActionListener -> RegisterView : getInstance()
+activate RegisterView
+RegisterView --> ActionListener : RegisterView
+deactivate RegisterView
+ActionListener -> RegisterView : show()
+activate RegisterView
+deactivate ActionListener
+
+note left of RegisterView : Now we are on the Register Menu
+RegisterView -> RegisterController : getInstance()
+activate RegisterController
+RegisterController --> RegisterView : RegisterController
+deactivate RegisterController
+RegisterView -> RegisterController : cancelButtonListener()
+activate RegisterController
+RegisterController -> ActionListener : <<create>>
+activate ActionListener
+deactivate ActionListener
+RegisterController --> RegisterView : ActionListener
+deactivate RegisterController
+
+RegisterView -> RegisterController : registerButtonListener()
+activate RegisterController
+RegisterController -> ActionListener : <<create>>
+activate ActionListener
+deactivate ActionListener
+RegisterController --> RegisterView : ActionListener
+deactivate RegisterController
+
+Customer --> RegisterView : Enters new Account Info and selects Customer OR Merchant Radio Button
+deactivate RegisterView
+Customer --> ActionListener : Presses Register Button
+activate ActionListener
+ActionListener -> CoffeeModel : getInstance()
+activate CoffeeModel
+CoffeeModel --> ActionListener : CoffeeModel
+deactivate CoffeeModel
+ActionListener -> CoffeeModel : addUser()
+activate CoffeeModel
+
+CoffeeModel -> User : ValidateCredentials()
+activate User
+User -> User : hashCode()
+activate User
+deactivate User
+User --> CoffeeModel : true
+deactivate User
+deactivate CoffeeModel
+ActionListener -> JOptionPane : showMessageDialog("Failed to create account.")
+deactivate ActionListener
+activate JOptionPane
+JOptionPane --> Customer : Failed to create account.
+deactivate JOptionPane
+@enduml

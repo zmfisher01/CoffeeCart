@@ -1,0 +1,62 @@
+@startuml
+
+note as owner
+Login Class Diagram
+Created by Zee Fisher
+end note
+
+class CoffeeCart {
+	void main()
+}
+
+class User {
+	username: String
+	password: int
+	userType: boolean
+	boolean validateCredentials(username, password)
+	boolean equals() 
+	int hashCode()
+	boolean getUserType()
+	String getUsername()
+}
+
+class CoffeeModel {
+	instance: CoffeeModel
+	userList: LinkedList<User>
+	loggedInUser: User
+	void saveUserList()
+	void recoverUserList()
+	void addUser(String username, String password, boolean userType)	
+	void loginUser(String username, String password)
+	void logoutUser(String username)
+	User getLoggedInUser()
+	getInstance()
+}
+
+class LoginView {
+	instance: LoginView
+	void show()
+	void hide()
+	LoginView getInstance()
+}
+
+class LoginController {
+	instance: LoginController
+	ActionListener loginButtonListener();
+	ActionListener registerButtonListener();
+	LoginController getInstance()
+}
+
+interface ActionListener
+
+class LinkedList
+
+CoffeeCart "1" --> "1" LoginView
+CoffeeModel "1" --> "1" LinkedList
+User "*" --o "1" LinkedList
+LoginController "1" --o "1" LoginView
+LoginController "1" --> "*" ActionListener
+LoginView "1" --o "1" CoffeeModel 
+
+@enduml
+

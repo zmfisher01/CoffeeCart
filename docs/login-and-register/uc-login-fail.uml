@@ -1,0 +1,105 @@
+@startuml
+
+actor Customer as "Customer or Merchant"
+participant CoffeeCart
+participant LoginView
+participant LoginController
+participant CoffeeModel
+participant LinkedList
+participant User
+participant "ActionListener <<interface>>" as ActionListener
+
+note left of Customer
+Created by Zee Fisher
+end note
+
+note left of Customer
+Customer Enters Incorrect Login Info
+
+	1.1 After step 1 Customer enters bad Login username/password combination
+	1.2 Customer selects “Submit”
+	1.3 System compares login information to database
+	1.4 System informs customer that login information was incorrect and to try again
+
+OR
+
+Merchant Enters Incorrect Login Info
+
+	1.1 After step 1 Merchant enters bad Login username/password combination
+	1.2 Merchant selects “Submit”
+	1.3 System compares login information to database
+	1.4 System informs merchant that login information was incorrect and to try again
+end note
+
+note left of Customer
+**These Use Cases have been comibined due to being nearly indistinguishable.**
+end note
+
+CoffeeCart -> CoffeeCart : main()
+activate CoffeeCart
+CoffeeCart -> CoffeeModel : getInstance()
+activate CoffeeModel
+CoffeeModel --> CoffeeCart : CoffeeModel
+deactivate CoffeeModel
+CoffeeCart -> CoffeeModel : recoverUserList()
+activate CoffeeModel
+deactivate CoffeeModel
+CoffeeCart -> LoginView : getInstance()
+activate LoginView
+LoginView --> CoffeeCart : LoginView
+deactivate LoginView
+CoffeeCart -> LoginView : show()
+deactivate CoffeeCart
+
+activate LoginView
+LoginView -> LoginController : getInstance()
+activate LoginController
+LoginController --> LoginView : LoginController
+deactivate LoginController
+LoginView -> LoginController : loginButtonListener()
+activate LoginController
+LoginController -> ActionListener : <<create>>
+activate ActionListener
+LoginController --> LoginView : ActionListener
+deactivate ActionListener
+deactivate LoginController
+LoginView -> LoginController : registerButtonListener()
+activate LoginController
+LoginController -> ActionListener : <<create>>
+activate ActionListener
+LoginController --> LoginView : ActionListener
+deactivate ActionListener
+deactivate LoginController
+LoginView --> Customer : Swing GUI
+Customer --> LoginView : Enters username and password in GUI
+deactivate LoginView
+Customer --> ActionListener : Presses Login button
+
+activate ActionListener
+ActionListener -> CoffeeModel : getInstance()
+activate CoffeeModel
+CoffeeModel --> ActionListener : CoffeeModel
+deactivate CoffeeModel
+ActionListener -> CoffeeModel : loginUser()
+activate CoffeeModel
+CoffeeModel -> LinkedList : get()
+activate LinkedList
+deactivate LinkedList
+CoffeeModel -> User : ValidateCredentials()
+activate User
+User -> User : hashCode()
+activate User
+deactivate User
+User --> CoffeeModel : false
+deactivate User
+deactivate CoffeeModel
+ActionListener -> JOptionPane : showMessageDialog("Bad Login Info")
+deactivate ActionListener
+activate JOptionPane
+JOptionPane --> Customer : "Bad Login Info"
+deactivate JOptionPane
+
+
+
+
+@enduml
