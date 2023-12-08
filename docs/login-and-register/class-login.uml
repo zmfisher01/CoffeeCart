@@ -28,7 +28,6 @@ class CoffeeModel {
 	void recoverUserList()
 	void addUser(String username, String password, boolean userType)	
 	void loginUser(String username, String password)
-	void logoutUser(String username)
 	User getLoggedInUser()
 	getInstance()
 }

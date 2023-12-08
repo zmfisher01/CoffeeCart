@@ -1,0 +1,1253 @@
+<link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<h1 id="finalreportcoffeecart">Final Report Coffee Cart</h1>
+
+<hr />
+
+<h1 id="group29:coffee-shopshoppingcart">Group 29: &#8220;Coffee-Shop&#8221; Shopping Cart</h1>
+
+<p>This is a Java shopping cart application with a Swing UI. It logs in Customers, who can add a selection of products to a cart, and then purchase those items. Customers can even view more detailed information about a product before adding it. In the Cart, they can adjust item quantity or remove unwanted items. Merchants can also log in. Merchants may view products similarly to customers, alongside being able to edit product details, add products, and remove products.</p>
+
+<h2 id="teammembers">Team Members</h2>
+
+<ul>
+<li> Zee Fisher</li>
+<li> Edwin Gomez</li>
+<li> Charles Fernandez-Hamoui</li>
+</ul>
+
+<h2 id="glossary">Glossary</h2>
+
+<ul>
+<li> Java : The Java programming language, compiler, and respective software platform.</li>
+<li> Swing UI: GUI toolkit for Java.</li>
+<li> Customer : User who purchases products from the Coffee-Shop.</li>
+<li> Merchant : User who lists products to be sold on the Coffee-Shop.</li>
+<li> System : Abstract component of the shop that manages its functionality.</li>
+<li> Product : Purchasable item composed of a price, quantity, description, image, and name.</li>
+<li> Cart : Collection of products a user wants to purchase.</li>
+<li> Product Database : Database of products that can be purchased on Coffee-Shop.</li>
+</ul>
+
+<h2 id="functionalspecification">Functional Specification</h2>
+
+<ol>
+<li> Registers new Customers and Merchants.</li>
+<li> Logs in new Customers and Merchants.</li>
+<li> Displays purchasable Products to Buyers.</li>
+<li> Displays currently listed Products to Merchants.</li>
+<li> Tracks Products a Buyer wants to purchase in a Cart.</li>
+<li> Reduces quantity of Products after Purchases.</li>
+<li> Adds new Products to be sold by Merchants.</li>
+<li> Increases quantity of currently listed Products.</li>
+<li> Displays revenue, sales, and profit to Merchants.</li>
+</ol>
+
+<h2 id="usecases">Use Cases</h2>
+
+<h3 id="customerlogsin">Customer Logs In</h3>
+
+<ol>
+<li><p> System displays Login page with option to sign in or create account.</p></li>
+<li><p> Customer enters username and Password</p></li>
+<li><p> Customer selects &#8220;Submit&#8221;</p></li>
+<li><p> System compares login info to database and finds matching username and hashed password</p></li>
+<li><p> System displays home page: a list of purchasable items, each with a picture, name, and price</p></li>
+<li><p> System displays options to view details, add to cart, and view cart</p></li>
+</ol>
+
+<h3 id="customerlogsin--variations">Customer Logs In &#8211; Variations</h3>
+
+<p><strong>Customer Enters Incorrect Login Info</strong></p>
+
+<ol>
+<li><p> 1 After step 1 Customer enters bad Login username/password combination</p></li>
+<li><p> 2 Customer selects &#8220;Submit&#8221;</p></li>
+<li><p> 3 System compares login information to database</p></li>
+<li><p> 4 System informs customer that login information was incorrect and to try again</p></li>
+</ol>
+
+<p><strong>Customer Clicks Register</strong></p>
+
+<ol>
+<li><p> 1 After Step 1 Customer selects &#8220;Register&#8221;</p></li>
+<li><p> 2 System directs customer to the account creation page</p></li>
+<li><p> 3 Customer enters a username, password, the same password again, and a type</p></li>
+<li><p> 4 System validates password and if the username isn&#8217;t already used</p></li>
+<li><p> 5 System redirects to login page</p></li>
+</ol>
+
+<p><strong>Customer Enters Bad Register info</strong></p>
+
+<ol>
+<li><p> 1 After step 2.2 Customer enters already used information or mismatched passwords</p></li>
+<li><p> 2 System updates registration page to inform customer of the mistake</p></li>
+</ol>
+
+<h3 id="customerreviewsproductdetails">Customer Reviews Product Details</h3>
+
+<ol>
+<li><p> Customer carries out <strong>Customer Logs In</strong></p></li>
+<li><p> Customer selects item name from list</p></li>
+<li><p> System directs customer to product page: display of a products name, picture, price, merchant, and description.</p></li>
+<li><p> System displays options to &#8220;Return&#8221; to product list or to &#8220;Add to Cart&#8221;</p></li>
+<li><p> Customer selects &#8220;Return&#8221; and returns to hope page.</p></li>
+</ol>
+
+<h3 id="customeraddsitemstoshoppingcart">Customer Adds Items to Shopping Cart</h3>
+
+<ol>
+<li><p> Customer carries out <strong>Customer Logs In</strong></p></li>
+<li><p> Customer selects &#8220;Add to cart&#8221; next to item</p></li>
+<li><p> System adds item to cart</p></li>
+</ol>
+
+<h3 id="customeraddsitemstoshoppingcart--variations">Customer Adds Items to Shopping Cart &#8211; Variations</h3>
+
+<p><strong>Customer Is In Product Details</strong></p>
+
+<ol>
+<li><p> 1 Customer carries out <strong>Customer Reviews Product Details</strong></p></li>
+<li><p> 2 Customer selects &#8220;Add to cart&#8221;</p></li>
+<li><p> 3 System adds item to cart</p></li>
+</ol>
+
+<p><strong>Item already in cart.</strong></p>
+
+<ol>
+<li><p> 1 After step 2 OR 1.2 System finds item already in cart</p></li>
+<li><p> 2 System increases quantity of item in cart</p></li>
+</ol>
+
+<h3 id="customerreviewsupdatesshoppingcart">Customer Reviews/Updates Shopping Cart</h3>
+
+<ol>
+<li><p> Customer carries out <strong>Customer Logs In</strong> OR <strong>Customer Adds Items to Shopping Cart</strong></p></li>
+<li><p> System displays shopping cart, a list of unique items the user wants to purchase and the quantity</p></li>
+<li><p> System displays options to return to homepage, delete item from cart, change quantity, and to checkout</p></li>
+<li><p> Customer Selects &#8220;Return to Homepage&#8221;</p></li>
+<li><p> System displays homepage</p></li>
+</ol>
+
+<h3 id="customerreviewsupdatesshoppingcart--variations">Customer Reviews/Updates Shopping Cart &#8211; Variations</h3>
+
+<p><strong>User Selects &#8220;Delete Item From Cart&#8221;</strong></p>
+
+<ol>
+<li><p> 1 After step 3 Customer selects &#8220;Delete Item From Cart&#8221; next to the item to delete.</p></li>
+<li><p> 2 System removes that unique item from the Customer&#8217;s cart and updates the page.</p></li>
+</ol>
+
+<p><strong>Customer Selects &#8220;Change quantity&#8221;</strong></p>
+
+<ol>
+<li><p> 1 After step 3 Customer selects &#8220;Change quantity&#8221;</p></li>
+<li><p> 2 Customer enters new quantity between 1 and the available quantity.</p></li>
+<li><p> 3 System updates new quantity in cart and page</p></li>
+</ol>
+
+<p><strong>Customer Selects &#8220;Checkout&#8221;</strong></p>
+
+<ol>
+<li><p> 1 After step 3 Customer selects &#8220;Checkout&#8221;</p></li>
+<li><p> 2 System displays checkout page with fields for payment info and address.</p></li>
+<li><p> 3 System displays options to &#8220;Complete Checkout&#8221; or &#8220;Cancel Checkout&#8221;.</p></li>
+</ol>
+
+<h3 id="customerchecksout">Customer Checks Out</h3>
+
+<ol>
+<li><p> Customer carries out <strong>Customer Reviews/Updates Shopping Cart</strong> variation <strong>Customer Selects &#8220;Checkout&#8221;</strong></p></li>
+<li><p> Customer enters payment and address information</p></li>
+<li><p> Customer selects &#8220;Complete Checkout&#8221; which submits payment, address, and cart.</p></li>
+<li><p> System deducts each purchased Product&#8217;s quantity by the amount purchased.</p></li>
+</ol>
+
+<h3 id="customerchecksout--variations">Customer Checks Out &#8211; Variations</h3>
+
+<p><strong>Customer Selects &#8220;Cancel Checkout&#8221;</strong></p>
+
+<ol>
+<li><p> 1 After step 1 OR step 2, customer selects &#8220;Cancel Checkout&#8221;</p></li>
+<li><p> 2 System returns to Cart page</p></li>
+</ol>
+
+<h3 id="merchantlogsin">Merchant Logs In</h3>
+
+<ol>
+<li><p> System displays Login page with option to sign in or create account.</p></li>
+<li><p> Merchant enters username and Password</p></li>
+<li><p> Merchant selects &#8220;Submit&#8221;</p></li>
+<li><p> System compares login info to database and finds matching username and hashed password</p></li>
+<li><p> System displays merchant page: a list of items up for sale, each with a picture, name, and price</p></li>
+<li><p> System displays options to view details, remove product, and add product.</p></li>
+</ol>
+
+<h3 id="merchantlogsin--variations">Merchant Logs In &#8211; Variations</h3>
+
+<p><strong>Merchant Enters Incorrect Login Info</strong></p>
+
+<ol>
+<li><p> 1 After step 1 Merchant enters bad Login username/password combination</p></li>
+<li><p> 2 Merchant selects &#8220;Submit&#8221;</p></li>
+<li><p> 3 System compares login information to database</p></li>
+<li><p> 4 System informs merchant that login information was incorrect and to try again</p></li>
+</ol>
+
+<p><strong>Merchant Clicks Register</strong></p>
+
+<ol>
+<li><p> 1 After Step 1 Merchant selects &#8220;Register&#8221;</p></li>
+<li><p> 2 System directs Merchant to the account creation page</p></li>
+<li><p> 3 Merchant enters a username, password, the same password again, and a type</p></li>
+<li><p> 4 System validates password and if the username isn&#8217;t already used</p></li>
+<li><p> 5 System redirects to login page</p></li>
+</ol>
+
+<p><strong>Merchant Enters Bad Register info</strong></p>
+
+<ol>
+<li><p> 1 After step 2.2 Merchant enters already used information or mismatched passwords</p></li>
+<li><p> 2 System updates registration page to inform Merchant of the mistake</p></li>
+</ol>
+
+<h3 id="merchantreviewsupdatesinventory">Merchant Reviews/Updates Inventory</h3>
+
+<ol>
+<li><p> Merchant carries out <strong>Merchant Logs In</strong></p></li>
+<li><p> Merchant selects a product name to view details</p></li>
+<li><p> System displays product details, an option to go back, and an option to edit details.</p></li>
+<li><p> Merchant selects &#8220;Edit Details&#8221; and submits new/changed details</p></li>
+<li><p> System updates product in database and for the display</p></li>
+</ol>
+
+<h3 id="merchantreviewsupdatesinventory--variations">Merchant Reviews/Updates Inventory &#8211; Variations</h3>
+
+<p><strong>Merchant Selects &#8220;Remove Product&#8221;</strong></p>
+
+<ol>
+<li><p> 1 After step 1. Merchant selects &#8220;Remove Product&#8221;</p></li>
+<li><p> 2 System prompts merchant for a confirmation</p></li>
+<li><p> 3 Merchant selects &#8220;OK&#8221;</p></li>
+<li><p> 4 System removes product</p></li>
+</ol>
+
+<p><strong>Merchant Cancels Removing Product</strong></p>
+
+<ol>
+<li><p> 1 After step 1.2 Merchant selects &#8220;Cancel&#8221;</p></li>
+<li><p> 2 No product is removed</p></li>
+</ol>
+
+<p><strong>Merchant edits Product Quantity</strong></p>
+
+<ol>
+<li><p> 1 After step 1. merchant selects &#8220;Edit Quantity&#8221;</p></li>
+<li><p> 2 Merchant types in a new quantity and confirms.</p></li>
+<li><p> 3 System updates quantity in Product Database.</p></li>
+</ol>
+
+<h3 id="merchantaddsnewproduct">Merchant Adds New Product</h3>
+
+<ol>
+<li><p> Merchant carries out <strong>Merchant Logs In</strong></p></li>
+<li><p> Merchant selects &#8220;Add Product&#8221;</p></li>
+<li><p> System displays add product page with space for product details</p></li>
+<li><p> Merchant enters product information</p></li>
+<li><p> Merchant selects &#8220;Submit&#8221;</p></li>
+<li><p> System adds product to product database</p></li>
+</ol>
+
+<h3 id="merchantreviewsrevenuesalesandprofit">Merchant Reviews Revenue, Sales, and Profit</h3>
+
+<ol>
+<li><p> Merchant completes <strong>Merchant Logs In</strong></p></li>
+<li><p> Merchant selects &#8220;View Stats&#8221;</p></li>
+<li><p> System displays the Merchant&#8217;s Revenue, Sales, and Profit</p></li>
+<li><p> Merchant selects &#8220;Close&#8221;</p></li>
+<li><p> System hides the stats</p></li>
+</ol>
+
+<h1 id="loginandregistercomponentsbyzeefisher">Login and Register components by Zee fisher</h1>
+
+<h2 id="crclogin:">CRC Login:</h2>
+
+<h3 id="coffeecart">CoffeeCart</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Initalizes the application.</li>
+<li>Activates the Model of the Login page</li>
+<li>Shows Login View</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>CoffeeModel</li>
+<li>LoginView</li>
+</ul></li>
+</ul>
+
+<h3 id="user">User</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Store username, password, and type</li>
+<li>Validate uesrname and password</li>
+<li>Identifies type</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>LoginModel</li>
+<li>LoginController</li>
+</ul></li>
+</ul>
+
+<h3 id="coffeemodel">CoffeeModel</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Manages List of Users</li>
+<li>Manages User Validation</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>LoginView</li>
+<li>ActionListener</li>
+<li>LinkedList</li>
+</ul></li>
+</ul>
+
+<h3 id="loginview">LoginView</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Manage login layout</li>
+<li>Attach action listeners</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>Controller</li>
+<li>JFrame, JPanel, JTextField, JPasswordField, JButton, JLabel</li>
+<li>ActionListener</li>
+</ul></li>
+</ul>
+
+<h3 id="logincontroller">LoginController</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Create ActionListeners</li>
+<li>Listens to buttons</li>
+<li>Validates Username and Password</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>LoginView</li>
+<li>LoginModel</li>
+<li>ActionListener</li>
+<li>JOptionPane</li>
+</ul></li>
+</ul>
+
+<h3 id="registerview">RegisterView</h3>
+
+<ul>
+<li> <strong>responsibilities</strong>
+
+<ul>
+<li>Manage register layout</li>
+</ul></li>
+<li> <strong>collaborators</strong>
+
+<ul>
+<li>JFrame, JPanel, JTextField, JPasswordField, JButton, JLabel, JRadioButton</li>
+</ul></li>
+</ul>
+
+<h3 id="customermainview">CustomerMainView</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Manage customer main layout</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>JFrame, JPanel, JTextField, JPasswordField, JButton, JLabel</li>
+</ul></li>
+</ul>
+
+<h2 id="crcregister">CRC Register</h2>
+
+<h3 id="coffeecart">CoffeeCart</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Initalizes the application.</li>
+<li>Activates the Model of the Login page</li>
+<li>Shows Login View</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>CoffeeModel</li>
+<li>LoginView</li>
+</ul></li>
+</ul>
+
+<h3 id="user">User</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Store username, password, and type</li>
+<li>Validate uesrname and password</li>
+<li>Identifies type</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>LoginModel</li>
+<li>LoginController</li>
+</ul></li>
+</ul>
+
+<h3 id="coffeemodel">CoffeeModel</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Manages List of Users</li>
+<li>Manages User Validation</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>LoginView</li>
+<li>ActionListener</li>
+<li>LinkedList</li>
+</ul></li>
+</ul>
+
+<h3 id="loginview">LoginView</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Manage login layout</li>
+<li>Attach action listeners</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>LoginController</li>
+<li>JFrame, JPanel, JTextField, JPasswordField, JButton, JLabel</li>
+<li>ActionListener</li>
+</ul></li>
+</ul>
+
+<h3 id="logincontroller">LoginController</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Create ActionListeners</li>
+<li>Listens to buttons</li>
+<li>Validates Username and Password</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>LoginView</li>
+<li>LoginModel</li>
+<li>ActionListener</li>
+<li>JOptionPane</li>
+</ul></li>
+</ul>
+
+<h3 id="registerview">RegisterView</h3>
+
+<ul>
+<li> <strong>responsibilities</strong>
+
+<ul>
+<li>Manage register layout</li>
+<li>Attach action listeners</li>
+</ul></li>
+<li> <strong>collaborators</strong>
+
+<ul>
+<li>JFrame, JPanel, JTextField, JPasswordField, JButton, JLabel, JRadioButton</li>
+<li>RegisterController</li>
+<li>ActionListener</li>
+</ul></li>
+</ul>
+
+<h3 id="registercontroller">RegisterController</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Create ActionListeners</li>
+<li>Listens to buttons</li>
+<li>Validates Username and Password</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>RegisterView</li>
+<li>RegisterModel</li>
+<li>ActionListener</li>
+<li>JOptionPane</li>
+</ul></li>
+</ul>
+
+<h3 id="customermainview">CustomerMainView</h3>
+
+<ul>
+<li> <strong>Responsibilities</strong>
+
+<ul>
+<li>Manage customer main layout</li>
+</ul></li>
+<li> <strong>Collaborators</strong>
+
+<ul>
+<li>JFrame, JPanel, JTextField, JPasswordField, JButton, JLabel</li>
+</ul></li>
+</ul>
+
+<h2 id="classdiagramlogin:">Class Diagram, Login:</h2>
+
+<figure>
+<img src="./login-and-register/class-login.png" alt="" />
+</figure>
+
+<h2 id="classdiagramregister:">Class Diagram, Register:</h2>
+
+<figure>
+<img src="./login-and-register/class-register.png" alt="" />
+</figure>
+
+<h2 id="use-casediagrams:">Use-Case Diagrams:</h2>
+
+<p><img src="./login-and-register/uc-login.png" alt="" />
+<img src="./login-and-register/uc-login-fail.png" alt="" />
+<img src="./login-and-register/uc-login-to-register.png" alt="" />
+<img src="./login-and-register/uc-login-to-register-fail.png" alt="" /></p>
+
+<h2 id="javafortheloginandregisterpages:">Java for the Login and Register pages:</h2>
+
+<pre><code>
+// CoffeeCart.java
+// Created by Zee Fisher
+
+/**
+ * CoffeCart is the entry point of the application.
+ */
+public class CoffeeCart {
+	
+	/**
+	 * main initializes the application by 
+	 * recovering the list of users and showing the 
+	 * login view.
+	 * @param args IGNORED
+	 */
+	public static void main(String[] args) {
+
+		CoffeeModel.getInstance().recoverUserList();
+		LoginView.getInstance().show();
+	}
+
+}
+
+// CoffeeModel.java
+// Created by Zee Fisher
+
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.lang.IllegalArgumentException;
+import java.io.*;
+import javax.swing.JOptionPane;
+
+/**
+ * CoffeModel handles the storage, verification, and retrieval of user accounts
+ */
+public class CoffeeModel {
+
+	/**
+	 * Singleton Constructor
+	 */
+	private CoffeeModel() {}
+
+	/**
+	 * getInstance gets CoffeModel Instance
+	 * @return CoffeeModel instance
+	 */
+	public static CoffeeModel getInstance() {
+		return instance;
+	}
+
+	/**
+	 * saveUserList saves the user to a file. 
+	 * Private as only the CoffeModel should be saving.
+	 */
+	private void saveUserList() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(&quot;userList.dat&quot;));
+			out.writeObject(userList);
+			out.close();
+		}
+		catch (Exception e) {
+			System.out.println(&quot;Write error:&quot;);
+			System.out.println(e);
+		}
+	}
+
+	/**
+	 * recoverUserList recovers user list from a file.
+	 * Called initially by CoffeCart to init application.
+	 */
+	public void recoverUserList() {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(&quot;userList.dat&quot;));
+                        Object inputObj = in.readObject();
+                        if(inputObj.getClass() == LinkedList.class) {
+                                userList = new LinkedList&lt;User&gt;((LinkedList&lt;User&gt;)inputObj);
+                        } else {
+                                System.out.println(&quot;Error reading file. Creating blank list&quot;);
+				JOptionPane.showMessageDialog(null, &quot;Error reading user List file. Creating blank list&quot;, &quot;Alert&quot;, JOptionPane.INFORMATION_MESSAGE); 
+				userList = new LinkedList&lt;User&gt;();
+                        }
+                        in.close();	
+		}
+		catch (Exception e) {
+			System.out.println(&quot;Error opening file. Creating blank list&quot;);
+			JOptionPane.showMessageDialog(null, &quot;Error opening user list file. Creating blank list&quot;, &quot;Alert&quot;, JOptionPane.INFORMATION_MESSAGE); 
+			userList = new LinkedList&lt;User&gt;();
+		}
+	}
+
+	/**
+	 * addUser adds a uesr to the list of user accounts.
+	 * @param username Valid String username
+	 * @param password Valid String password
+	 * @param userType 0 for customer, 1 for merchant
+	 * @throws IllegalArgumentException if the username already exists.
+	 */
+	public void addUser(String username, String password, boolean userType) throws IllegalArgumentException {
+		for (int i = 0; i &lt; userList.size(); i++) {
+			if(userList.get(i).getUsername().equals(username)) {
+				throw new IllegalArgumentException();
+			}
+		}
+		userList.add(new User(username, password, userType));
+		saveUserList();
+	}
+
+	/**
+	 * loginUser logs a user in by username and password.
+	 * @param username valid String username
+	 * @param password valid String password
+	 * @throws NoSuchElementException if there is no associated account
+	 */
+	public void loginUser(String username, String password) throws NoSuchElementException {
+		for (int i = 0; i &lt; userList.size(); i++) {
+			if(userList.get(i).validateCredentials(username, password)) {
+				loggedInUser = userList.get(i);
+				if(loggedInUser.getUserType()) {
+					JOptionPane.showMessageDialog(null, &quot;Welcome, Merchant&quot;, &quot;Welcome&quot;, JOptionPane.PLAIN_MESSAGE);	
+				} else {
+					JOptionPane.showMessageDialog(null, &quot;Welcome, Customer&quot;, &quot;Welcome&quot;, JOptionPane.PLAIN_MESSAGE);
+				}
+				return;
+			}
+		}
+		throw new NoSuchElementException();
+	}
+
+	/**
+	 * getLoggedInUser gets the currently logged in user.
+	 * @return logged in user
+	 */
+	public User getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	private LinkedList&lt;User&gt; userList;
+	private User loggedInUser;
+	private static CoffeeModel instance = new CoffeeModel();
+
+}
+
+
+// User.java
+// By Zee Fisher
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.lang.IllegalArgumentException;
+import java.io.*;
+import javax.swing.JOptionPane;
+
+/**
+ * User class store user account information
+ */
+public class User implements Serializable {
+
+        /**
+         * User constructor creats a new usre from a username, password, and type
+         * @param username String username
+         * @param password String password
+         * @param type 0 for customer, 1 for merchant
+         */
+        public User(String username, String password, boolean type) {
+                this.username = username;
+                this.password = password.hashCode();
+                this.userType = type;
+        }
+
+        /**
+         * validateCredentials validates a username and password against a user.
+         * @param username String username
+         * @param password String password
+         * @return boolean true if they are valid for this account, false otherwise
+         */
+        public boolean validateCredentials(String username, String password) {
+                if (username.equals(this.username) &amp;&amp; password.hashCode() == this.password) {
+                        return true;
+                }
+                return false;
+        }
+
+        /**
+         * equals compares the hash of to users to see if they are equal.
+         * @param other User to compare to this User
+         * @return true if they are equal in hash, false otherwise
+         */
+        public boolean equals(User other) {
+                return this.hashCode() == other.hashCode();
+        }
+
+        /**
+         * hashCode creates a hash for a user
+         * @return hash created from username and password.
+         */
+        public int hashCode() {
+                return username.hashCode() + password;
+        }
+
+        /**
+         * getUserType gets the users type
+         * @return 0 for customer, 1 for merchant
+         */
+        public boolean getUserType() {
+                return userType;
+        }
+
+        /**
+         * getUsername gets the username
+         * @return String username.
+         */
+        public String getUsername() {
+                return username;
+        }
+
+        private String username; // username of account
+        private int password; // password of account
+        private boolean userType; // 0 if customer 1 if merchant
+}
+
+// LoginView.java
+// created by Zee Fisher
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * Class Login View creates the view for the login menu
+ */
+public class LoginView {
+
+	/**
+	 * LoginView singleton constructor defines the elements in the GUI
+	 */
+	private LoginView() 
+	{
+		this.frame = new JFrame();
+		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+
+		final JPanel header = new JPanel();
+		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+		frame.add(header);
+
+		final JLabel title = new JLabel(&quot;CoffeeCart&quot;);
+		header.add(title);
+
+		final JPanel body = new JPanel();
+		body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+		frame.add(body);
+
+		final JLabel loginTitle = new JLabel(&quot;Login&quot;);
+		body.add(loginTitle);
+
+		final JPanel inputs = new JPanel();
+		inputs.setLayout(new BoxLayout(inputs, BoxLayout.Y_AXIS));
+		body.add(inputs);
+
+		final JLabel usernameLabel = new JLabel(&quot;Username&quot;);
+		inputs.add(usernameLabel);
+
+		final JTextField username = new JTextField();
+		inputs.add(username);
+		
+		final JLabel passwordLabel = new JLabel(&quot;Password&quot;);
+		inputs.add(passwordLabel);
+
+		final JPasswordField password = new JPasswordField();
+		inputs.add(password);
+
+		final JPanel buttons = new JPanel();
+		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
+		body.add(buttons);
+
+		final JButton register = new JButton(&quot;Register&quot;);
+		buttons.add(register);
+		register.addActionListener(LoginController.getInstance().registerButtonListener());
+
+		final JButton login = new JButton(&quot;Login&quot;);
+		buttons.add(login);
+		login.addActionListener(LoginController.getInstance().loginButtonListener(username, password));
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+	}
+
+	/**
+	 * show, makes the menu visible
+	 */
+	public void show() 
+	{
+		this.frame.setVisible(true);
+	}
+
+	/**
+	 * hide, make the menu not visible
+	 */
+	public void hide() 
+	{
+		this.frame.setVisible(false);
+	}
+
+	/**
+	 * Loginview returns login singleton instance.
+	 */
+	public static LoginView getInstance() {
+		return instance;
+	}
+
+	private final JFrame frame;
+	private static LoginView instance = new LoginView();
+
+}
+
+// LoginController.java
+// By Zee Fisher
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * LoginController defines actions for buttons
+ */
+public class LoginController {
+
+        /**
+         * private singleton constructor for LoginController
+         */
+        private LoginController() {}
+
+        /**
+         * loginButtonListener creates a button for loggin in.
+         * @param username text field that stores username
+         * @param password pass field that stores password
+         * @return ActionListener for button
+         */
+        public ActionListener loginButtonListener(final JTextField username, final JPasswordField  password) {
+                return new ActionListener () {
+                        public void actionPerformed(ActionEvent event) {
+                                try {
+                                        CoffeeModel.getInstance().loginUser(username.getText(), password.getText());
+                                        LoginView.getInstance().hide();
+                                        PlaceHolderView.getInstance().show();
+                                }
+                                catch(Exception e) {
+                                        JOptionPane.showMessageDialog(null, &quot;Invalid Username or Password.&quot;, &quot;Bad Credentials&quot;, JOptionPane.ERROR_MESSAGE);
+                                }
+                        }
+                };
+        }
+
+
+        /**
+         * registerButtonListener creates a button for going to register.
+         * @return ActionListener for button
+         */
+        public ActionListener registerButtonListener() {
+                return new ActionListener () {
+                        public void actionPerformed(ActionEvent e) {
+                                LoginView.getInstance().hide();
+                                RegisterView.getInstance().show();
+                        }
+                };
+        }
+
+	/**
+	 * getInstance gets the instance of the LoginControllers singleton.
+	 * @return LoginController
+	 */
+        public static LoginController getInstance() {
+                return instance;
+        }
+
+        private static LoginController instance = new LoginController();
+}
+
+// RegisterView.java
+// created by Zee Fisher
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * RegisterView creates the register menu
+ */
+public class RegisterView {
+
+	/**
+	 * Singleton constructor for RegisterView defines GUI
+	 */
+	private RegisterView() 
+	{
+		this.frame = new JFrame();
+		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+
+		final JPanel header = new JPanel();
+		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+		frame.add(header);
+
+		final JLabel title = new JLabel(&quot;CoffeeCart&quot;);
+		header.add(title);
+
+		final JPanel body = new JPanel();
+		body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+		frame.add(body);
+
+		final JLabel loginTitle = new JLabel(&quot;Register&quot;);
+		body.add(loginTitle);
+
+		final JPanel inputs = new JPanel();
+		inputs.setLayout(new BoxLayout(inputs, BoxLayout.Y_AXIS));
+		body.add(inputs);
+
+		final JLabel usernameLabel = new JLabel(&quot;Enter Username&quot;);
+		inputs.add(usernameLabel);
+
+		final JTextField username = new JTextField(&quot;Username&quot;);
+		inputs.add(username);
+
+		final JLabel passwordLabel1 = new JLabel(&quot;Enter Password&quot;);
+		inputs.add(passwordLabel1);
+
+		final JPasswordField password1 = new JPasswordField(&quot;Password&quot;);
+		inputs.add(password1);
+
+		final JLabel passwordLabel2 = new JLabel(&quot;Enter Password Again&quot;);
+		inputs.add(passwordLabel2);
+
+		final JPasswordField password2 = new JPasswordField(&quot;Password&quot;);
+		inputs.add(password2);
+
+		final ButtonGroup typeButtons = new ButtonGroup();
+
+		final JRadioButton customer = new JRadioButton(&quot;Customer&quot;);
+		typeButtons.add(customer);
+		inputs.add(customer);
+		customer.setSelected(true);
+
+		final JRadioButton merchant = new JRadioButton(&quot;Merchant&quot;);
+		typeButtons.add(merchant);
+		inputs.add(merchant);
+
+		final JPanel buttons = new JPanel();
+		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
+		body.add(buttons);
+
+		final JButton cancel = new JButton(&quot;Cancel&quot;);
+		buttons.add(cancel);
+		cancel.addActionListener(RegisterController.getInstance().cancelButtonListener());
+
+		final JButton register = new JButton(&quot;Register&quot;);
+		buttons.add(register);
+		register.addActionListener(RegisterController.getInstance().registerButtonListener(username, password1, password2, merchant));
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+	}
+
+	/**
+	 *shows register menu
+	 */
+	public void show() 
+	{
+		this.frame.setVisible(true);
+	}
+	
+	/**
+	 *hides register menu
+	 */
+	public void hide() 
+	{
+		this.frame.setVisible(false);
+	}
+
+	/**
+	 * gets register instance
+	 * @return RegisterView
+	 */
+	public static RegisterView getInstance() {
+		return instance;
+	}
+
+	private final JFrame frame;
+	private static RegisterView instance = new RegisterView();
+
+}
+
+
+// RegisterController.java
+// By Zee Fisher
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * Creates register button action listeners
+ */
+public class RegisterController {
+
+        private RegisterController() {}
+
+        /** Action listener for resgistering
+         * @param username text field for username
+         * @param password1 first password field
+         * @param password2 second password field
+         * @param merchant merchant radio buttons
+         * @return ActionListener
+         * */
+        public ActionListener registerButtonListener(final JTextField username, final JPasswordField  password1, final JPasswordField password2, final JRadioButton merchant) {
+                return new ActionListener () {
+                        public void actionPerformed(ActionEvent event) {
+                                try {
+                                        if(password1.getText().equals(password2.getText())) {
+                                                CoffeeModel.getInstance().addUser(username.getText(), password1.getText(), merchant.isSelected());
+                                                RegisterView.getInstance().hide();
+                                                LoginView.getInstance().show();
+                                        } else {
+                                                JOptionPane.showMessageDialog(null, &quot;Passwords Do Not Match&quot;, &quot;Passwords Do Not Match&quot;, JOptionPane.ERROR_MESSAGE);
+                                        }
+                                }
+                                catch(Exception e) {
+                                        JOptionPane.showMessageDialog(null, &quot;Username Taken&quot;, &quot;Username Taken&quot;, JOptionPane.ERROR_MESSAGE);
+                                }
+                        }
+                };
+        }
+
+        /**
+         * cancel listner
+         * @return action listner to go back to menu
+         */
+        public ActionListener cancelButtonListener() {
+                return new ActionListener () {
+                        public void actionPerformed(ActionEvent e) {
+                                RegisterView.getInstance().hide();
+                                LoginView.getInstance().show();
+                        }
+                };
+        }
+
+	/**
+	 * Returns the RegisterController singleton
+	 * @return RegisterController
+	 */
+        public static RegisterController getInstance() {
+                return instance;
+        }
+
+        private static RegisterController instance = new RegisterController();
+}
+
+// PlaceHolderView.java
+// created by Zee Fisher
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * Place Holder View. This view acts as a placeholder due to other parts of the project not being completed.
+ */
+public class PlaceHolderView {
+
+	/**
+	 * Constructs a singleton placeholder view
+	 */
+	private PlaceHolderView() 
+	{
+		this.frame = new JFrame();
+		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+
+		final JPanel header = new JPanel();
+		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+		frame.add(header);
+
+		final JLabel title = new JLabel(&quot;CoffeeCart&quot;);
+		header.add(title);
+
+		final JPanel body = new JPanel();
+		body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+		frame.add(body);
+
+		final JLabel loginTitle = new JLabel(&quot;PlaceHolder&quot;);
+		body.add(loginTitle);
+
+		final JPanel inputs = new JPanel();
+		inputs.setLayout(new BoxLayout(inputs, BoxLayout.Y_AXIS));
+		body.add(inputs);
+
+		final JPanel buttons = new JPanel();
+		buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
+		body.add(buttons);
+		
+		final JButton login = new JButton(&quot;Back to Login&quot;);
+		buttons.add(login);
+		login.addActionListener(PlaceHolderController.getInstance().loginButtonListener());
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+	}
+
+	/**
+	 * shows the placeholder view
+	 */
+	public void show() 
+	{
+		this.frame.setVisible(true);
+	}
+	
+	/**
+	 * hides the placeholder view
+	 */
+	public void hide() 
+	{
+		this.frame.setVisible(false);
+	}
+
+	/**
+	 * gets the singleton instance for the placeholder view
+	 * @return PlaceHolderView
+	 */
+	public static PlaceHolderView getInstance() {
+		return instance;
+	}
+
+	private final JFrame frame;
+	private static PlaceHolderView instance = new PlaceHolderView();
+
+}
+
+// PlaceHolderController.java
+// By Zee Fisher
+//  _________________________________________
+// &lt; This one's cause not everything's done! &gt;
+//  -----------------------------------------
+//         \   ^__^
+//          \  (oo)\_______
+//             (__)\       )\/\
+//                 ||----w |
+//                 ||     ||
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+/**
+ * Simple ActionListeners for the placeholder view.
+ */
+class PlaceHolderController {
+
+	/** 
+	* Cosntructs PlaceHolderController singleton 
+	*/
+        private PlaceHolderController() {}
+
+        /**
+         * Creates listener to return to login menu.
+         * @return ActionListener that return to login menu
+         */
+        public ActionListener loginButtonListener() {
+                return new ActionListener () {
+                        public void actionPerformed(ActionEvent e) {
+                                PlaceHolderView.getInstance().hide();
+                                LoginView.getInstance().show();
+                        }
+                };
+        }
+
+	/**
+	 * Gets the PHC's instance
+	 * @return PlaceHolderController
+	 */
+        public static PlaceHolderController getInstance() {
+                return instance;
+        }
+
+        private static PlaceHolderController instance = new PlaceHolderController();
+}
+
+
+
+</code></pre>
+
+<hr />
+
+<p><em>Made by Zee Fisher in MultiMarkdown v6</em></p>
